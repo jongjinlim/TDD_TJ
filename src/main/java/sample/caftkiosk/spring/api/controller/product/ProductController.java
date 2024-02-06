@@ -1,4 +1,4 @@
-package sample.caftkiosk.spring.api.service.product.controller.product;
+package sample.caftkiosk.spring.api.controller.product;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
