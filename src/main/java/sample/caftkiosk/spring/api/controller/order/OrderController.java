@@ -1,5 +1,6 @@
 package sample.caftkiosk.spring.api.controller.order;
 
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,8 @@ public class OrderController {
 
     @PostMapping("/api/v1/orders/new")
     public void createOrder(@RequestBody OrderCreateRequest request) {
-        orderService.createOrder(request);
+        LocalDateTime registeredDateTime = LocalDateTime.now();
+        orderService.createOrder(request, registeredDateTime);
 
     }
 }
