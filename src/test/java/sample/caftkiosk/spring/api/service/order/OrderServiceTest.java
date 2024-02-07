@@ -1,13 +1,10 @@
 package sample.caftkiosk.spring.api.service.order;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 
 //@SpringBootTest
 @DataJpaTest
@@ -38,4 +35,18 @@ class OrderServiceTest {
         // then
     }
 
+    @DisplayName("재고와 관련된 상품이 포함되어 있는 주문번호 리스트를 받아 주문을 생성한다.")
+    @Test
+    void createOrderWithStock() {
+        // given
+        LocalDateTime registeredDateTime = LocalDateTime.now();
+
+//        Product product1 = createProduct();
+
+//        Stock stock1 = new Stock();
+
+        // when
+
+        // then
+    }
 }
