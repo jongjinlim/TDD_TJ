@@ -11,7 +11,13 @@ class AmericanoTest {
     void getName() {
         Americano americano = new Americano();
 
-//        assertEquals(americano.getName(), "아메리카노");
-        assertThat(americano.getName()).isEqualTo("아메리카노");
+        assertEquals(americano.getName(), "아메리카노");	// JUnit5
+        assertThat(americano.getName()).isEqualTo("아메리카노");	// assertJ
     }
+
+	@Test
+	void getPrice() {
+		Americano americano = new Americano();
+		assertThat(americano.getPrice()).isEqualTo(4000);	// assertJ
+	}
 }
