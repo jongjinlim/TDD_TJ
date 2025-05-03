@@ -8,17 +8,11 @@ import sample.caftkiosk.spring.domain.product.ProductType;
 
 @Getter
 public class ProductResponse {
-
     private Long id;
-
     private String productNumber;
-
     private ProductType type;
-
     private ProductSellingStatus sellingStatus;
-
     private String name;
-
     private int price;
 
     @Builder
