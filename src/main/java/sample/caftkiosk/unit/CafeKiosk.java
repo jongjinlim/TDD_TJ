@@ -38,11 +38,14 @@ public class CafeKiosk {
     }
 
     public int calculatorTotalPrice() {
-        int totalPrice = 0;
-        for (Beverage beverage : beverageList) {
-            totalPrice += beverage.getPrice();
-        }
-        return totalPrice;
+//        int totalPrice = 0;
+//        for (Beverage beverage : beverageList) {
+//            totalPrice += beverage.getPrice();
+//        }
+//        return totalPrice;
+		return beverageList.stream()
+				.mapToInt(Beverage::getPrice)
+				.sum();
     }
 
     public Order createOrder() {

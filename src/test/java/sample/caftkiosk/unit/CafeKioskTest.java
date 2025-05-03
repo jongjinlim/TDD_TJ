@@ -1,5 +1,7 @@
 package sample.caftkiosk.unit;
 
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import sample.caftkiosk.unit.beverage.Americano;
 import sample.caftkiosk.unit.beverage.Latte;
@@ -11,6 +13,7 @@ import static org.assertj.core.api.Assertions.*;
 
 class CafeKioskTest {
 
+	@DisplayName("음료 1개 추가하면 주문 목록에 담긴다.")
     @Test
     void add_manual_test() {
         CafeKiosk cafeKiosk = new CafeKiosk();
@@ -20,6 +23,7 @@ class CafeKioskTest {
         System.out.println(">>> 담긴 음료 : " + cafeKiosk.getBeverageList().get(0).getName());
     }
 
+	@DisplayName("음료 1개 추가하면 주문 목록에 담긴다.")
 	@Test
 	void add() {
 		CafeKiosk cafeKiosk = new CafeKiosk();
@@ -79,6 +83,24 @@ class CafeKioskTest {
 		assertThat(cafeKiosk.getBeverageList()).isEmpty();
 	}
 
+	@DisplayName("주문 목록에 담긴 상품들의 총 금액을 계산할 수 있다.")
+	@Test
+	void calculateTotalPrice() {
+		// given
+		CafeKiosk cafeKiosk = new CafeKiosk();
+		Americano americano = new Americano();
+		Latte latte = new Latte();
+
+		cafeKiosk.add(americano);
+		cafeKiosk.add(latte);
+
+		// when
+		int totalPrice = cafeKiosk.calculatorTotalPrice();
+
+		// then
+		assertThat(totalPrice).isEqualTo(8500);
+	}
+	
 	@Test
 	void createOrder() {
 		CafeKiosk cafeKiosk = new CafeKiosk();
