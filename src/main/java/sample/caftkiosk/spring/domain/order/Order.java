@@ -1,17 +1,27 @@
 package sample.caftkiosk.spring.domain.order;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sample.caftkiosk.spring.domain.BaseEntity;
+import sample.caftkiosk.spring.domain.orderporduct.OrderProduct;
 import sample.caftkiosk.spring.domain.product.Product;
 
 @Getter
-@NoArgsConstructor
-public class Order {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "orders")
+@Entity
+public class Order extends BaseEntity {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -21,11 +31,25 @@ public class Order {
 
     private LocalDateTime registeredDatetime;
 
-    public Order(List<Product> products) {
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private List<OrderProduct> orderProducts = new ArrayList<>();
 
+    public Order(List<Product> products, LocalDateTime registeredDatetime) {
+		this.orderStatus = OrderStatus.INIT;
+		this.totalPrice = calculateTotalPrice(products);
+		this.registeredDatetime = registeredDatetime;
+		this.orderProducts = products.stream()
+				.map(product -> new OrderProduct(this, product))
+				.collect(Collectors.toList());
     }
 
-    public static Order create(List<Product> products) {
-        return new Order(products);
+	public static Order create(List<Product> products, LocalDateTime registeredDatetime) {
+        return new Order(products, registeredDatetime);
     }
+
+	private int calculateTotalPrice(List<Product> products) {
+		return products.stream()
+				.mapToInt(Product::getPrice)
+				.sum();
+	}
 }
