@@ -8,11 +8,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sample.caftkiosk.spring.domain.BaseEntity;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Stock {
+public class Stock extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +24,19 @@ public class Stock {
     private int quantity;
 
     @Builder
-    public Stock(Long id, String productNumber, int quantity) {
-        this.id = id;
+    public Stock(String productNumber, int quantity) {
         this.productNumber = productNumber;
         this.quantity = quantity;
     }
 
-    public boolean isQuantityLessThan(int quantity) {
+	public static Stock create(String productNumber, int quantity) {
+		return Stock.builder()
+				.productNumber(productNumber)
+				.quantity(quantity)
+				.build();
+	}
+
+	public boolean isQuantityLessThan(int quantity) {
         return this.quantity < quantity;
     }
 
