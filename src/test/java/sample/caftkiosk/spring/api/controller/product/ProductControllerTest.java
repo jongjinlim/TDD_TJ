@@ -8,9 +8,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import sample.caftkiosk.spring.api.service.product.ProductService;
-import sample.caftkiosk.spring.api.service.product.request.ProductCreateRequest;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @WebMvcTest(controllers = ProductController.class)
 class ProductControllerTest {
