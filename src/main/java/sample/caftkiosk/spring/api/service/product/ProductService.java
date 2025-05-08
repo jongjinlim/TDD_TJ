@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sample.caftkiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import sample.caftkiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import sample.caftkiosk.spring.api.service.product.response.ProductResponse;
 import sample.caftkiosk.spring.domain.product.Product;
 import sample.caftkiosk.spring.domain.product.ProductRepository;
@@ -26,7 +27,7 @@ public class ProductService {
 	// 동시성 이슈
 	// UUID ?
 	@Transactional
-	public ProductResponse createProduct(ProductCreateRequest request) {
+	public ProductResponse createProduct(ProductCreateServiceRequest request) {
 		// productNumber
 		String nextProductNumber = createNextProductNumber();
 

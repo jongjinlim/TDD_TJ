@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sample.caftkiosk.spring.api.controller.order.request.OrderCreateRequest;
+import sample.caftkiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.caftkiosk.spring.domain.order.OrderRepository;
 import sample.caftkiosk.spring.api.service.order.response.OrderResponse;
 import sample.caftkiosk.spring.domain.order.Order;
@@ -35,7 +36,7 @@ public class OrderService {
 	 * @param registeredDateTime
 	 * @return
 	 */
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
 
